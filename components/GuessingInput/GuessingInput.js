@@ -207,12 +207,12 @@ function GuessingInput() {
             </p>
           </div>
 
-          {/* <button
+          <button
             onClick={newGame}
             className="py-3 px-6 bg-red-500 rounded text-[20px] mt-6"
           >
             Exit
-          </button> */}
+          </button>
         </>
       ) : (
         <div className="flex items-center sm:space-x-4 space-x-2">

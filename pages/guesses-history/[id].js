@@ -1,7 +1,15 @@
 import React from "react";
 import Navbar from "components/Navbar/Navbar";
 import { db } from "/firebase";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import Head from "next/head";
 import SuperJson from "superjson";
 import { MdOutlineArrowBackIos } from "react-icons/md";
@@ -13,9 +21,22 @@ import { useRouter } from "next/router";
 
 function GuessesHistory(props) {
   const { guesses, guessessub } = SuperJson.parse(props.superjson);
+  const [historyList, setHistoryList] = React.useState(guesses);
   const currentUser = useAuth();
   const { theme, setTheme } = useTheme();
   const router = useRouter();
+
+  const deleteHistory = async (id) => {
+    try {
+      let result = await deleteDoc(doc(db, "guesses", id));
+      setHistoryList(
+        historyList.filter((data) => (data.id === id ? null : data))
+      );
+    } catch (error) {
+      0;
+      console.log(error);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -26,30 +47,38 @@ function GuessesHistory(props) {
       <Navbar />
 
       <main className="py-10 container max-w-[1000px]  mx-auto">
-        <div className="flex items-center space-x-6 mb-10">
-          <button
-            onClick={() => router.back()}
-            passHref
-            className="cursor-pointer"
-          >
-            <MdOutlineArrowBackIos
-              size={35}
-              color={theme == "dark" ? "white" : "black"}
+        <div className="mb-10">
+          <div className="flex items-center space-x-6 mb-5">
+            <button
+              onClick={() => router.back()}
+              passHref
               className="cursor-pointer"
-            />
-          </button>
-          <h1 className="font-corben text-[30px] sm:text-[50px] font-bold mb-2">
-            History
-          </h1>
+            >
+              <MdOutlineArrowBackIos
+                size={35}
+                color={theme == "dark" ? "white" : "black"}
+                className="cursor-pointer"
+              />
+            </button>
+            <h1 className="font-corben text-[30px] sm:text-[50px] font-bold mb-2">
+              History
+            </h1>
+          </div>
+          {/* <button
+            className="py-4 px-6 bg-red-500 rounded font-bold font-corben"
+            // onClick={resetHistory}
+          >
+            Reset History
+          </button> */}
         </div>
 
         <div className={`space-y-4 `}>
-          {guesses.map((data, index) => {
+          {historyList.map((data, index) => {
             return (
               <div
                 key={data.id}
                 className={`${
-                  data.isGuessed ? "bg-green-400" : "bg-red-400"
+                  data?.isGuessed ? "bg-green-400" : "bg-red-400"
                 } py-2 px-4 sm:py-4 sm:px-6 rounded font-corben font-bold`}
               >
                 <div className="flex items-center space-x-2 justify-between">
@@ -57,14 +86,14 @@ function GuessesHistory(props) {
                     Answer : {data.correctGuessValue}{" "}
                   </h1>
 
-                  <div className="flex item-center justify-center space-x-3 sm:space-x-4">
-                    <div className="flex flex-col items-center space-y-[1px] sm:space-y-[2px]">
-                      <p className="text-[10px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
+                  <div className="flex item-center justify-center space-x-2 sm:space-x-4">
+                    <div className="flex flex-col items-center justify-center space-y-[1px] sm:space-y-[2px]">
+                      <p className="text-[6px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
                         {new Date(
                           data.createdAt.seconds * 1000
                         ).toLocaleDateString()}
                       </p>
-                      <p className="text-[10px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
+                      <p className="text-[6px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
                         {new Date(
                           data.createdAt.seconds * 1000
                         ).toLocaleTimeString()}
@@ -80,10 +109,16 @@ function GuessesHistory(props) {
                         },
                       }}
                     >
-                      <a className="py-1 px-2 sm:py-2 sm:px-4 bg-blue-500 rounded flex items-center text-[12px] sm:text-[16px]">
+                      <a className="py-1 px-2 sm:py-2 sm:px-4 bg-blue-500 rounded flex items-center text-[10px] sm:text-[16px]">
                         Details
                       </a>
                     </Link>
+                    <button
+                      onClick={() => deleteHistory(data.id)}
+                      className="py-1 px-2 sm:py-2 sm:px-4 bg-red-700 rounded flex items-center text-[10px] sm:text-[16px]"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
