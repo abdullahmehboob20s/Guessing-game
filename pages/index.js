@@ -112,7 +112,7 @@ export default function Home() {
                 Guessing Game
               </h1>
               <h1 className="font-corben dark:text-white text-[20px] sm:text-[30px] mb-3 font-black capitalize">
-                Made By Abdullah
+                Made By Shawn Tseng
               </h1>
             </div>
 
