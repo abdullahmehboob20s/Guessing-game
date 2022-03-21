@@ -25,7 +25,7 @@ function GuessesHistory(props) {
 
       <Navbar />
 
-      <main className="p-10 max-w-[1000px] w-[90%] mx-auto">
+      <main className="py-10 container max-w-[1000px]  mx-auto">
         <div className="flex items-center space-x-6 mb-10">
           <button
             onClick={() => router.back()}
@@ -38,7 +38,9 @@ function GuessesHistory(props) {
               className="cursor-pointer"
             />
           </button>
-          <h1 className="font-corben text-[50px] font-bold mb-2">History</h1>
+          <h1 className="font-corben text-[30px] sm:text-[50px] font-bold mb-2">
+            History
+          </h1>
         </div>
 
         <div className={`space-y-4 `}>
@@ -48,21 +50,21 @@ function GuessesHistory(props) {
                 key={data.id}
                 className={`${
                   data.isGuessed ? "bg-green-400" : "bg-red-400"
-                } py-4 px-6 rounded font-corben font-bold`}
+                } py-2 px-4 sm:py-4 sm:px-6 rounded font-corben font-bold`}
               >
                 <div className="flex items-center space-x-2 justify-between">
-                  <h1 className="font-corben font-bold text-[24px]">
+                  <h1 className="font-corben font-bold text-[16px] sm:text-[24px]">
                     Answer : {data.correctGuessValue}{" "}
                   </h1>
 
-                  <div className="flex item-center justify-center space-x-4">
-                    <div className="flex flex-col items-center space-y-[2px]">
-                      <p className="text-[16px] font-corben opacity-[.5] font-bold text-black">
+                  <div className="flex item-center justify-center space-x-3 sm:space-x-4">
+                    <div className="flex flex-col items-center space-y-[1px] sm:space-y-[2px]">
+                      <p className="text-[10px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
                         {new Date(
                           data.createdAt.seconds * 1000
                         ).toLocaleDateString()}
                       </p>
-                      <p className="text-[16px] font-corben opacity-[.5] font-bold text-black">
+                      <p className="text-[10px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
                         {new Date(
                           data.createdAt.seconds * 1000
                         ).toLocaleTimeString()}
@@ -78,7 +80,7 @@ function GuessesHistory(props) {
                         },
                       }}
                     >
-                      <a className="py-2 px-4 bg-blue-500 rounded flex items-center">
+                      <a className="py-1 px-2 sm:py-2 sm:px-4 bg-blue-500 rounded flex items-center text-[12px] sm:text-[16px]">
                         Details
                       </a>
                     </Link>

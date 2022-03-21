@@ -27,7 +27,7 @@ function Details(props) {
 
       <Navbar />
 
-      <main className="p-10 max-w-[1000px] w-[90%] mx-auto">
+      <main className="py-10 container max-w-[1000px]  mx-auto">
         <div className="flex items-center space-x-6 mb-10">
           <button
             onClick={() => router.back()}
@@ -40,14 +40,14 @@ function Details(props) {
               className="cursor-pointer"
             />
           </button>
-          <h1 className="font-corben text-[50px] font-bold mb-2">
+          <h1 className="font-corben text-[30px] sm:text-[50px] font-bold mb-2">
             History Details
           </h1>
         </div>
 
         <div className="mb-10">
           {isGuessed === true || guesses.length !== 0 ? (
-            <h1 className="text-[30px] dark:text-white text-black font-corben font-bold mb-2">
+            <h1 className="text-[18px] sm:text-[30px] dark:text-white text-black font-corben font-bold mb-2">
               Guessed In{" "}
               <span className="font-corben text-custom-yellow">
                 {(new Date(guesses[0]?.createdAt.seconds * 1000).getTime() -
@@ -68,7 +68,7 @@ function Details(props) {
           )}
 
           {guesses.length == 0 ? (
-            <h1 className="text-[30px] text-white font-corben font-bold text-center opacity-[.3]">
+            <h1 className="text-[18px] sm:text-[30px] text-white font-corben font-bold text-center opacity-[.3]">
               No Histroy Details
             </h1>
           ) : (
@@ -83,21 +83,21 @@ function Details(props) {
                 key={data.id}
                 className={`${
                   correctValue == data.guess ? "bg-green-400" : "bg-red-400"
-                } py-4 px-6 rounded font-corben font-bold`}
+                } py-2 px-4 sm:py-4 sm:px-6 rounded font-corben font-bold`}
               >
                 <div className="flex items-center space-x-2 justify-between">
-                  <h1 className="font-corben font-bold text-[24px]">
+                  <h1 className="font-corben font-bold text-[20px] sm:text-[24px]">
                     Guess : {data.guess}{" "}
                   </h1>
 
                   <div className="flex item-center justify-center space-x-2">
                     <div className="flex flex-col items-center space-y-[2px]">
-                      <p className="text-[16px] font-corben opacity-[.5] font-bold text-black">
+                      <p className="text-[12px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
                         {new Date(
                           data.createdAt.seconds * 1000
                         ).toLocaleDateString()}
                       </p>
-                      <p className="text-[16px] font-corben opacity-[.5] font-bold text-black">
+                      <p className="text-[12px] sm:text-[16px] font-corben opacity-[.5] font-bold text-black">
                         {new Date(
                           data.createdAt.seconds * 1000
                         ).toLocaleTimeString()}

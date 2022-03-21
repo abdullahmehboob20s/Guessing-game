@@ -145,11 +145,11 @@ function GuessingInput() {
     <div>
       {gameStarted ? (
         <>
-          <div className="mb-[40px]">
-            <h1 className="font-corben text-[20px] mb-[3px]">
+          <div className="mb-[20px] sm:mb-[40px]">
+            <h1 className="font-corben text-[16px] sm:text-[20px] mb-[3px]">
               Guess Any Number between
             </h1>
-            <span className=" text-[#ffa822] text-[20px] font-corben font-semibold">
+            <span className=" text-[#ffa822] text-[18px] sm:text-[20px] font-corben font-semibold">
               0 - 100
             </span>
           </div>
@@ -165,12 +165,13 @@ function GuessingInput() {
           <div>
             <form
               onSubmit={handleSubmit(Submit)}
-              className="flex  overflow-hidden "
+              className="flex overflow-hidden "
             >
               <input
                 type="number"
                 placeholder="Guess a Number"
-                className={`py-[20px] px-[20px] text-[20px] font-corben outline-none leading-normal w-[240px] border-2  border-r-0 rounded-tl-[15px] rounded-bl-[15px] text-custom-yellow
+                autoFocus={true}
+                className={`py-[14px] sm:py-[20px] px-[20px] sm:px-[20px] text-[18px] sm:text-[20px] font-corben outline-none leading-normal w-[200px] sm:w-[240px] border-2  border-r-0 rounded-tl-[15px] rounded-bl-[15px] text-custom-yellow
   bg-gray-900
   
   ${isGuessed === false && "border-red-500 text-red-500"}
@@ -191,7 +192,7 @@ function GuessingInput() {
               />
               <button
                 type="submit"
-                className={`min-w-[110px] text-[18px] text-gray-700 font-corben font-semibold bg-custom-yellow leading-normal rounded-tr-[15px] rounded-br-[15px]  
+                className={`min-w-[80px] sm:min-w-[110px] text-[14px] sm:text-[18px] text-gray-700 font-corben font-semibold bg-custom-yellow leading-normal rounded-tr-[15px] rounded-br-[15px]  
   
   ${isGuessed === false && "bg-red-500"}
   ${isGuessed === "" && "bg-custom-yellow"}
@@ -200,29 +201,30 @@ function GuessingInput() {
                 Guess
               </button>
             </form>
-            <p className="text-red-500 mt-3 font-corben text-center">
+
+            <p className="text-red-500 mt-3 font-corben text-center text-[14px] sm:text-[16px]">
               {errors?.guess?.message}
             </p>
           </div>
 
-          <button
+          {/* <button
             onClick={newGame}
             className="py-3 px-6 bg-red-500 rounded text-[20px] mt-6"
           >
             Exit
-          </button>
+          </button> */}
         </>
       ) : (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center sm:space-x-4 space-x-2">
           <button
-            className="bg-green-500 py-3 px-6 rounded-lg text-[20px] font-bold"
+            className="bg-green-500 py-2 sm:py-3 sm:px-6 px-4 rounded-lg text-[16px] sm:text-[20px] font-bold"
             onClick={startGame}
           >
             Start Game
           </button>
 
           <Link href={`/guesses-history/${currentUser?.uid}`} passHref>
-            <a className="font-corben text-[22px] px-[20px] py-[12px] bg-custom-yellow text-white flex items-center space-x-3 rounded outline-none">
+            <a className="font-corben  font-bold text-[16px] sm:text-[22px] px-4 py-2 sm:px-[20px] sm:py-[12px] bg-custom-yellow text-white flex items-center space-x-3 rounded outline-none">
               <span className="font-trirong">Watch History</span>{" "}
               <BiHistory color="white" />
             </a>

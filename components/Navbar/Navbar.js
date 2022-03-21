@@ -20,7 +20,7 @@ function Navbar() {
       <div className="container">
         <div className="h-[80px] flex items-center justify-between">
           <Link href="/" passHref className="cursor-pointer">
-            <h1 className="font-corben font-extrabold text-[26px] cursor-pointer">
+            <h1 className="font-corben font-extrabold text-[18px] sm:text-[26px] cursor-pointer">
               GUESS IT
             </h1>
           </Link>
@@ -40,7 +40,7 @@ function Navbar() {
             {currentUser ? (
               <button onClick={logout}>
                 <img
-                  className="relative w-[45px] rounded-full h-[45px]"
+                  className="relative rounded-full sm:w-[45px] sm:h-[45px] w-[35px] h-[35px]"
                   src={currentUser?.photoURL}
                   alt=""
                 />

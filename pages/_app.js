@@ -5,7 +5,7 @@ import { ThemeProvider } from "next-themes";
 function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class" defaultTheme="dark">
         <Component {...pageProps} />
       </ThemeProvider>
     </RecoilRoot>
